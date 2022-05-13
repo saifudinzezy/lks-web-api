@@ -13,14 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('societies', function (Blueprint $table) {
+        Schema::create('doctors', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('regional_id')->nullable();
-            $table->integer('id_card_number')->length(16)->comment('NIK')->unique();
-            $table->enum('gender', ['male', 'female'])->default('male');
-            $table->string('address');
-            $table->string('token')->unique();
-            $table->string('password');
+            $table->string('name');
             $table->timestamps();
         });
     }
@@ -32,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('societies');
+        Schema::dropIfExists('doctors');
     }
 };

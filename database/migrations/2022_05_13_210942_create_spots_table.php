@@ -13,14 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('societies', function (Blueprint $table) {
+        Schema::create('spots', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('regional_id')->nullable();
-            $table->integer('id_card_number')->length(16)->comment('NIK')->unique();
-            $table->enum('gender', ['male', 'female'])->default('male');
-            $table->string('address');
-            $table->string('token')->unique();
-            $table->string('password');
+            $table->unsignedBigInteger('available_vacines_id')->nullable();
+            $table->string('name');
+            $table->enum('serve',[1,2,3])->comment('melayani')->default(1);
+            $table->integer('capacity')->comment('kapasitas')->default(10);
             $table->timestamps();
         });
     }
@@ -32,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('societies');
+        Schema::dropIfExists('spots');
     }
 };

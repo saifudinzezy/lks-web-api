@@ -13,11 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('regionals', function (Blueprint $table) {
-            $table->id();
-            $table->string('province')->comment('provinsi');
-            $table->string('district')->comment('daerah');
-            $table->timestamps();
+        Schema::table('societies', function (Blueprint $table) {
+            $table->foreign("regional_id")->references("id")->on("regionals")->onDelete("cascade");
         });
     }
 
@@ -28,6 +25,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('regionals');
+        // Schema::dropIfExists('societies');
     }
 };
