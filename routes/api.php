@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\RegionalController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\SocietyController;
@@ -19,3 +20,4 @@ use App\Http\Controllers\Api\SocietyController;
 //     return $request->user();
 // });
 Route::resource('societies', SocietyController::class);
+Route::resource('regionals', RegionalController::class);
