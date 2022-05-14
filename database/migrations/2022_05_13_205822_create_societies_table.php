@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('societies', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('regional_id')->nullable();
-            $table->integer('id_card_number')->length(16)->comment('NIK')->unique();
+            $table->string('id_card_number')->length(16)->comment('NIK')->unique();
             $table->string('name');
             $table->enum('gender', ['male', 'female'])->default('male');
             $table->string('address');
