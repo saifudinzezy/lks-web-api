@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('consultations', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('society_id')->nullable();
             $table->unsignedBigInteger('doctor_id')->nullable();
             $table->enum('status', ['pending', 'accepted', 'rejected'])->default('pending');
             $table->string('disease_history')->comment('riwayat penyakit')->nullable();

@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::table('consultations', function (Blueprint $table) {
             $table->foreign("doctor_id")->references("id")->on("doctors")->onDelete("cascade");
+            $table->foreign("society_id")->references("id")->on("societies")->onDelete("cascade");
         });
     }
 

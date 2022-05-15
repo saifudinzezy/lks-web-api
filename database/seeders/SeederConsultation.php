@@ -17,6 +17,7 @@ class SeederConsultation extends Seeder
     {
         $consultation = new Consultation();
         $consultation->doctor_id = '1';
+        $consultation->society_id = '1';
         $consultation->status = 'pending';
         $consultation->disease_history = 'tidak ada';
         $consultation->current_symptoms = 'tidak ada';

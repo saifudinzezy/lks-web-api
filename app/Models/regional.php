@@ -12,4 +12,10 @@ class Regional extends Model
         'province',
         'district',
     ];
+
+
+    public function society()
+    {
+        return $this->belongsTo(Society::class, 'regional_id', 'id');
+    }
 }
