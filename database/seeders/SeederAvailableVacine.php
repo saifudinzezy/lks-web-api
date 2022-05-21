@@ -16,8 +16,12 @@ class SeederAvailableVacine extends Seeder
     public function run()
     {
         $ava_vacine = new Available_vacine();
-        $ava_vacine->name = 'Sinovac';
-        $ava_vacine->available = 1;
+        $ava_vacine->spot_id = '1';
+        $ava_vacine->sinovac = 1;
+        $ava_vacine->astrazeneca = 0;
+        $ava_vacine->moderna = 0;
+        $ava_vacine->pfizer = 1;
+        $ava_vacine->sinnopharm = 1;
 
         $ava_vacine->save();
         $this->command->info('created available vacine successfully');

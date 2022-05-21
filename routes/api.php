@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\ConsultationController;
 use App\Http\Controllers\Api\DoctorController;
 use App\Http\Controllers\Api\RegionalController;
 use App\Http\Controllers\Api\SocietyController;
+use App\Http\Controllers\Api\SpotController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -27,3 +28,4 @@ Route::resource('societies', SocietyController::class);
 Route::resource('regionals', RegionalController::class);
 Route::resource('doctors', DoctorController::class);
 Route::resource('consultations', ConsultationController::class);
+Route::resource('spots', SpotController::class);

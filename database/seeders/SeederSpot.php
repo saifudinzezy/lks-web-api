@@ -16,10 +16,10 @@ class SeederSpot extends Seeder
     public function run()
     {
         $spot = new Spot();
-        $spot->available_vacines_id = '1';
         $spot->name = 'Purnawati Hospital';
         $spot->serve = '1';
         $spot->capacity = '10';
+        $spot->date = '2022-05-22';
 
         $spot->save();
         $this->command->info('created spot successfully');

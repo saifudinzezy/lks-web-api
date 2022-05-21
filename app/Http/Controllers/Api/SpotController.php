@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Consultation;
 use App\Models\Society;
+use App\Models\Spot;
 use Illuminate\Http\Request;
 
-class ConsultationController extends Controller
+class SpotController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,29 +27,7 @@ class ConsultationController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = \Validator::make($request->all(),[
-            'token' => 'required',
-            'disease_history' => 'required|string',
-            'current_symptoms' => 'required|string',
-        ]);
-
-        if($validator->fails()){
-            return response()->json($validator->errors());
-        }
-
-        $society = Society::where('token', $request->token)->first();
-        if ($society) {
-            Consultation::create([
-                'doctor_id' => '1',
-                'society_id' => $society->id,
-                'disease_history' => $request->disease_history,
-                'current_symptoms' => $request->current_symptoms,
-            ]);
-
-            return response()->json(['message' => 'Request consultation sent successful'],200);
-        } else {
-            return response()->json(['message' => 'Unauthorized user'],401);
-        }
+        //
     }
 
     /**
@@ -62,8 +40,7 @@ class ConsultationController extends Controller
     {
         $society = Society::where('token', $token)->first();
         if ($society) {
-            return response()->json(Consultation::where('society_id', $society->id)
-                ->with('doctor')->first(),200);
+            return response()->json(Spot::with('availabe_vacine')->get(),200);
         } else {
             return response()->json(['message' => 'Unauthorized user'],401);
         }

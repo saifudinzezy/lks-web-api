@@ -13,8 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('spots', function (Blueprint $table) {
-            $table->foreign("available_vacine_id")->references("id")->on("available_vacines")->onDelete("cascade");
+        Schema::table('available_vacines', function (Blueprint $table) {
+            $table->foreign("spot_id")->references("id")->on("spots")->onDelete("cascade");
         });
     }
 
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down()
     {
-        // Schema::dropIfExists('spots');
+        // Schema::dropIfExists('relation_available_vacine');
     }
 };
