@@ -4,68 +4,47 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Society;
+use App\Models\SocietyVaccination;
 use App\Models\Spot;
 use Illuminate\Http\Request;
 
 class SpotController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function show(Request $request)
     {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($token)
-    {
-        $society = Society::where('token', $token)->first();
+        $society = Society::where('token', $request->token)->first();
         if ($society) {
-            return response()->json(Spot::with('availabe_vacine')->get(),200);
+            return response()->json(['spots' => Spot::with('availabe_vacine')->get()],200);
         } else {
             return response()->json(['message' => 'Unauthorized user'],401);
         }
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function showSpot(Request $request, $spot_id)
     {
-        //
-    }
+        $date = date('Y-m-d');
+        //jika date kosong set ke tgl sekarang, jika date ada ambil nilai dari kiriman data
+        $spot = null;
+        $vaccination = null;
+        if (empty($request->date)){
+            $date;
+            $spot = Spot::find($spot_id)->where('date', $date)->with('availabe_vacine')->get();
+            $vaccination = SocietyVaccination::where('spot_id', $request->spot_id)->count();
+        } else {
+            $date = $request->date;
+            $spot = Spot::find($spot_id)->where('date', $date)->with('availabe_vacine')->get();
+            $vaccination = SocietyVaccination::where('spot_id', $request->spot_id)->count();
+        }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        $society = Society::where('token', $request->token)->first();
+        if ($society) {
+            return response()->json([
+                'date' => date('M d, Y', strtotime($date)),
+                'spots' => $spot,
+                'vaccinations_count' => $vaccination
+            ],200);
+        } else {
+            return response()->json(['message' => 'Unauthorized user'],401);
+        }
     }
 }

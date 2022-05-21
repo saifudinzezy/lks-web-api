@@ -8,6 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Consultation extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'doctor_id',
+        'society_id',
+        'disease_history',
+        'current_symptoms',
+    ];
 
     /**
      * Get the user associated with the Consultation

@@ -13,8 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('consultations', function (Blueprint $table) {
-            $table->foreign("doctor_id")->references("id")->on("doctors")->onDelete("cascade");
+        Schema::table('society_vaccinations', function (Blueprint $table) {
+            $table->foreign("spot_id")->references("id")->on("spots")->onDelete("cascade");
             $table->foreign("society_id")->references("id")->on("societies")->onDelete("cascade");
         });
     }
@@ -26,11 +26,10 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('consultations', function (Blueprint $table) {
-            // $table->dropColumn('doctor_id');
-            $table->dropConstrainedForeignId('doctor_id');
+        Schema::table('available_vacines', function (Blueprint $table) {
+            $table->dropConstrainedForeignId('spot_id');
             $table->dropConstrainedForeignId('society_id');
-            $table->dropColumn(['doctor_id','society_id']);
+            $table->dropColumn(['spot_id', 'society_id']);
         });
     }
 };

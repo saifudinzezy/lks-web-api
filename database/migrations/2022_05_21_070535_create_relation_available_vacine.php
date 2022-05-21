@@ -25,6 +25,9 @@ return new class extends Migration
      */
     public function down()
     {
-        // Schema::dropIfExists('relation_available_vacine');
+        Schema::table('available_vacines', function (Blueprint $table) {
+            $table->dropConstrainedForeignId('spot_id');
+            $table->dropColumn(['spot_id']);
+        });
     }
 };

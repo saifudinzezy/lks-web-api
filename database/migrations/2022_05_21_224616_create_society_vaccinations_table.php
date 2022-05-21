@@ -13,8 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('societies', function (Blueprint $table) {
-            $table->foreign("regional_id")->references("id")->on("regionals")->onDelete("cascade");
+        Schema::create('society_vaccinations', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('spot_id')->nullable();
+            $table->unsignedBigInteger('society_id')->nullable();
+            $table->timestamps();
         });
     }
 
@@ -25,9 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('societies', function (Blueprint $table) {
-            $table->dropConstrainedForeignId('regional_id');
-            $table->dropColumn('regional_id');
-        });
+        Schema::dropIfExists('society_vaccinations');
     }
 };
