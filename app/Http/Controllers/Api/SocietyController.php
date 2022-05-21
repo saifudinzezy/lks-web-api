@@ -11,7 +11,7 @@ class SocietyController extends Controller
     public function login(Request $request)
     {
         $validator = \Validator::make($request->all(),[
-            'id_card_number' => 'required|exists:societies,id_card_number|min:16|max:16',
+            'id_card_number' => 'required|min:16|max:16',
             'password' => 'required|string'
         ]);
 

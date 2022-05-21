@@ -15,8 +15,11 @@ return new class extends Migration
     {
         Schema::create('available_vacines', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->boolean('available')->default(1)->comment('tersedia');
+            $table->boolean('sinovac')->default(1)->comment('1=tersedia, 0=tidak tersedia');
+            $table->boolean('astrazeneca')->default(1)->comment('1=tersedia, 0=tidak tersedia');
+            $table->boolean('moderna')->default(1)->comment('1=tersedia, 0=tidak tersedia');
+            $table->boolean('pfizer')->default(1)->comment('1=tersedia, 0=tidak tersedia');
+            $table->boolean('sinnopharm')->default(1)->comment('1=tersedia, 0=tidak tersedia');
             $table->timestamps();
         });
     }
